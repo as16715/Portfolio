@@ -3,7 +3,7 @@
 import type React from "react"
 
 import Image from "next/image"
-import { PaperGifText } from "./PaperGif"
+import { PaperGifText } from "./PaperGifText"
 import { useEffect, useRef, useState } from "react"
 
 export function HeroSection() {
@@ -11,6 +11,7 @@ export function HeroSection() {
   const tiltRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -29,6 +30,19 @@ export function HeroSection() {
     window.addEventListener("mousemove", handleMouseMove)
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [isHovering])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      const windowHeight = window.innerHeight
+      const triggerPoint = windowHeight * 0.3 // Trigger when scrolled 30% of viewport height
+      
+      setIsScrolled(scrollY > triggerPoint)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const tiltStyle = {
     transform: isHovering
@@ -136,7 +150,7 @@ export function HeroSection() {
           <div className="relative mb-8 tilt-container" ref={tiltRef}>
             <div className="relative inline-block">
               <div
-                className="relative w-80 h-80 mx-auto rounded-3xl overflow-hidden shadow-2xl tilt-element"
+                className="relative w-[28rem] h-[28rem] mx-auto rounded-3xl overflow-hidden shadow-2xl tilt-element"
                 style={tiltStyle}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
@@ -144,8 +158,8 @@ export function HeroSection() {
                 <Image
                   src="/me.jpg"
                   alt="Aysha's portrait"
-                  width={320}
-                  height={320}
+                  width={448}
+                  height={448}
                   className="w-full h-full object-cover"
                   priority
                 />
@@ -154,7 +168,14 @@ export function HeroSection() {
           </div>
 
           <div className="relative space-y-6">
-            <div className="scrapbook-paper rounded-2xl p-8 shadow-lg" style={{ transform: "rotate(-1deg)" }}>
+            <div 
+              className={`scrapbook-paper rounded-2xl p-8 shadow-lg transition-all duration-1000 ease-out ${
+                isScrolled 
+                  ? "opacity-100 translate-x-0 scale-100" 
+                  : "opacity-0 -translate-x-128 scale-95"
+              }`}
+              style={{ transform: isScrolled ? "rotate(-1deg)" : "rotate(-1deg)" }}
+            >
               <h1 className="text-4xl md:text-6xl font-bold text-balance leading-tight text-foreground">
                 <span className="block mb-2">Hello! I'm </span>
                 <span className="text-primary text-5xl md:text-7xl">Aysha!</span>
@@ -162,10 +183,17 @@ export function HeroSection() {
               </h1>
             </div>
 
-            <div className="scrapbook-paper rounded-xl p-6 shadow-md" style={{ transform: "rotate(1deg)" }}>
+            <div 
+              className={`scrapbook-paper rounded-xl p-6 shadow-md transition-all duration-1000 ease-out delay-300 ${
+                isScrolled 
+                  ? "opacity-100 translate-x-0 scale-100" 
+                  : "opacity-0 translate-x-128 scale-95"
+              }`}
+              style={{ transform: isScrolled ? "rotate(1deg)" : "rotate(1deg)" }}
+            >
               <div className="text-2xl md:text-3xl font-bold text-muted-foreground">
                 <span>I design and make </span>
-                <PaperGifText words={skills} className="text-primary font-bold" />
+                <PaperGifText words={skills} className="text-primary font-bold align-bottom" />
               </div>
             </div>
           </div>
