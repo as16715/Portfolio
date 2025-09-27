@@ -51,7 +51,7 @@ export function PaperGifText({ words, className = "" }: PaperGifTextProps) {
           overflow: 'hidden',
           borderRadius: '2px',
           // Simple rectangle crop to remove grey background
-          clipPath: 'inset(15% 10% 15% 10%)',
+          // clipPath: 'inset(15% 10% 15% 10%)',
           // Position the GIF to align with text baseline
           top: '100%',
           left: '0',

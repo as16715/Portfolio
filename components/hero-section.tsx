@@ -177,8 +177,8 @@ export function HeroSection() {
               style={{ transform: isScrolled ? "rotate(-1deg)" : "rotate(-1deg)" }}
             >
               <h1 className="text-4xl md:text-6xl font-bold text-balance leading-tight text-foreground">
-                <span className="block mb-2">Hello! I'm </span>
-                <span className="text-primary text-5xl md:text-7xl">Aysha!</span>
+                <span className="block mb-2">Hello!</span>
+                <span className="text-primary text-5xl md:text-7xl">I'm Aysha!</span>
                 <span className="block mt-2">It's nice to meet you!</span>
               </h1>
             </div>
