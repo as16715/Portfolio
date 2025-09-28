@@ -69,14 +69,14 @@ export function HeroSection() {
         <Image src="/pink-bgm.png" alt="" fill className="object-cover" priority />
       </div>
 
-      {/* Decorative Veils (z-10 to z-20 only) */}
+      {/* Decorative Veils */}
       {[
-        { src: "/veil-1.png", top: "45%", left: "23%", w: 320, h: 384, rot: "-8deg", z: 13 },
-        { src: "/veil-2.png", top: "21%", right: "60%", w: 256, h: 320, rot: "10deg", z: 11 },
-        { src: "/veil-3.png", top: "-3%", right: "38%", w: 288, h: 320, rot: "12deg", z: 9 },
-        { src: "/veil-4.png", top: "-5%", right: "60%", w: 192, h: 288, rot: "0deg", z: 12 },
-        { src: "/veil-5.png", top: "20%", left: "65%", w: 240, h: 304, rot: "0deg", z: 11 },
-        { src: "/veil-6.png", top: "73%", right: "0%", w: 280, h: 350, rot: "0deg", z: 18 },
+        { src: "/veil-1.png", top: "45%", left: "23%", w: 320, h: 384, rot: "-8deg", z: 26 },
+        { src: "/veil-2.png", top: "21%", right: "60%", w: 256, h: 320, rot: "10deg", z: 25 },
+        { src: "/veil-3.png", top: "-3%", right: "38%", w: 288, h: 320, rot: "12deg", z: 15 }, // behind me.jpg
+        { src: "/veil-4.png", top: "-5%", right: "60%", w: 192, h: 288, rot: "0deg", z: 25 },
+        { src: "/veil-5.png", top: "20%", left: "65%", w: 240, h: 304, rot: "0deg", z: 25 },
+        { src: "/veil-6.png", top: "73%", right: "0%", w: 280, h: 350, rot: "0deg", z: 15 }, // behind me.jpg
       ].map((veil, i) => (
         <div
           key={i}
@@ -101,34 +101,65 @@ export function HeroSection() {
         </div>
       ))}
 
-      {/* Other Decorative Elements (max z-20) */}
+      {/* Other Decorative Elements */}
       <div
         className="absolute transition-transform duration-300 ease-out hover:scale-110"
-        style={{ bottom: "70%", left: "60%", width: "256px", height: "288px", transform: "rotate(6deg)", zIndex: 10 }}
+        style={{
+          bottom: "70%",
+          left: "60%",
+          width: "256px",
+          height: "288px",
+          transform: "rotate(6deg)",
+          zIndex: 15, // behind me.jpg
+        }}
       >
-        <Image src="/paris-stamp.png" alt="Paris Stamp" width={256} height={288} className="w-full h-full object-contain" />
+        <Image
+          src="/paris-stamp.png"
+          alt="Paris Stamp"
+          width={256}
+          height={288}
+          className="w-full h-full object-contain"
+        />
       </div>
 
       <div
         className="absolute transition-transform duration-300 ease-out hover:scale-110"
-        style={{ bottom: "35%", right: "64%", width: "224px", height: "320px", zIndex: 12 }}
+        style={{
+          bottom: "35%",
+          right: "64%",
+          width: "224px",
+          height: "320px",
+          zIndex: 25, // in front of me.jpg
+        }}
       >
-        <Image src="/telephone-booth.png" alt="Telephone Booth" width={224} height={320} className="w-full h-full object-contain" />
+        <Image
+          src="/telephone-booth.png"
+          alt="Telephone Booth"
+          width={224}
+          height={320}
+          className="w-full h-full object-contain"
+        />
       </div>
 
-      {/* Stickers */}
-      <div className="absolute top-20 left-1/4 w-32 h-32" style={{ transform: "rotate(25deg)", zIndex: 8 }}>
+      {/* Stickers (always behind me.jpg) */}
+      <div
+        className="absolute top-20 left-1/4 w-32 h-32"
+        style={{ transform: "rotate(25deg)", zIndex: 10 }}
+      >
         <Image src="/sticker.png" alt="" fill className="object-contain" />
       </div>
-      <div className="absolute bottom-32 right-1/4 w-28 h-28" style={{ transform: "rotate(-30deg)", zIndex: 8 }}>
+      <div
+        className="absolute bottom-32 right-1/4 w-28 h-28"
+        style={{ transform: "rotate(-30deg)", zIndex: 10 }}
+      >
         <Image src="/sticker-2.png" alt="" fill className="object-contain" />
       </div>
 
-      {/* Central content - always on top (z-30) */}
-      <div className="relative z-30 flex items-center justify-center min-h-screen px-6 py-20 pointer-events-none">
+      {/* Central content */}
+      <div className="relative flex items-center justify-center min-h-screen px-6 py-20 pointer-events-none">
         <div className="max-w-2xl mx-auto text-center">
-          {/* Portrait tilt */}
-          <div className="relative mb-8 tilt-container" ref={tiltRef}>
+          {/* Portrait tilt (z-20) */}
+          <div className="relative mb-8 tilt-container" ref={tiltRef} style={{ zIndex: 20 }}>
             <div
               className="relative w-[28rem] h-[28rem] mx-auto rounded-3xl overflow-hidden shadow-2xl tilt-element pointer-events-auto cursor-none"
               style={tiltStyle}
@@ -146,13 +177,15 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Scrapbook text boxes */}
-          <div className="relative space-y-6">
+          {/* Scrapbook text boxes (z-40 always on top) */}
+          <div className="relative space-y-6 z-40">
             <div
               className={`scrapbook-paper rounded-2xl p-8 shadow-lg transition-all duration-1000 ease-out relative ${
-                isScrolled ? "opacity-100 translate-x-0 scale-100" : "opacity-0 -translate-x-128 scale-95"
+                isScrolled
+                  ? "opacity-100 translate-x-0 scale-100"
+                  : "opacity-0 -translate-x-128 scale-95"
               }`}
-              style={{ transform: "rotate(-1deg)", zIndex: 40 }}
+              style={{ transform: "rotate(-1deg)" }}
             >
               <h1 className="text-4xl md:text-6xl font-bold leading-tight text-foreground">
                 <span className="block mb-2">Hello!</span>
@@ -163,13 +196,18 @@ export function HeroSection() {
 
             <div
               className={`scrapbook-paper rounded-xl p-6 shadow-md transition-all duration-1000 ease-out delay-300 relative ${
-                isScrolled ? "opacity-100 translate-x-0 scale-100" : "opacity-0 translate-x-128 scale-95"
+                isScrolled
+                  ? "opacity-100 translate-x-0 scale-100"
+                  : "opacity-0 translate-x-128 scale-95"
               }`}
-              style={{ transform: "rotate(1deg)", zIndex: 40 }}
+              style={{ transform: "rotate(1deg)" }}
             >
               <div className="text-2xl md:text-3xl font-bold text-muted-foreground">
                 <span>I design and make </span>
-                <PaperGifText words={skills} className="text-primary font-bold align-bottom" />
+                <PaperGifText
+                  words={skills}
+                  className="text-primary font-bold align-bottom"
+                />
               </div>
             </div>
           </div>
