@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import Image from "next/image"
 import { PaperGifText } from "./PaperGifText"
 import { useEffect, useRef, useState } from "react"
@@ -12,6 +11,7 @@ export function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [showTilt, setShowTilt] = useState(false) // New state for delayed tilt effect
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -44,11 +44,26 @@ export function HeroSection() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Handle hover enter/leave with delay
+  const handleMouseEnter = () => {
+    setIsHovering(true)
+    // Add a small delay before showing the tilt effect
+    setTimeout(() => {
+      setShowTilt(true)
+    }, 150)
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovering(false)
+    setShowTilt(false)
+  }
+
   const tiltStyle = {
-    transform: isHovering
+    transform: showTilt && isHovering
       ? `perspective(1000px) rotateY(${mousePosition.x * 15}deg) rotateX(${-mousePosition.y * 15}deg) translateZ(50px)`
       : `perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px)`,
-    transition: isHovering ? "none" : "transform 0.3s ease-out",
+    // Always apply transition for smooth movement
+    transition: "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
   }
 
   return (
@@ -58,13 +73,12 @@ export function HeroSection() {
         <Image src="/pink-bgm.png" alt="" fill className="object-cover" priority />
       </div>
 
-      {/* Veil 1 (now like me.jpg) */}
+      {/* Veil 1 */}
       <div
-        className="absolute top-0 left-0 w-80 h-96 pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
+        className="absolute top-0 left-0 w-80 h-96 pointer-events-auto cursor-none transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
         style={{ transform: "rotate(-8deg)", marginTop: "-2.5rem", marginLeft: "-2.5rem" }}
       >
         <div className="relative w-full h-full">
-          {/* w-80 = 320px, h-96 = 384px */}
           <Image
             src="/veil-1.png"
             alt="Veil 1"
@@ -77,11 +91,10 @@ export function HeroSection() {
 
       {/* Veil 3 */}
       <div
-        className="absolute top-0 right-0 w-72 h-80 pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
+        className="absolute top-0 right-0 w-72 h-80 pointer-events-auto cursor-none transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
         style={{ transform: "rotate(12deg)", marginTop: "-1.25rem", marginRight: "-1.25rem" }}
       >
         <div className="relative w-full h-full">
-          {/* w-72 = 288px, h-80 = 320px */}
           <Image
             src="/veil-3.png"
             alt="Veil 3"
@@ -94,11 +107,10 @@ export function HeroSection() {
 
       {/* Paris Stamp */}
       <div
-        className="absolute bottom-0 left-0 w-64 h-72 pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
+        className="absolute bottom-0 left-0 w-64 h-72 pointer-events-auto cursor-none transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
         style={{ transform: "rotate(6deg)", marginBottom: "-2rem", marginLeft: "-2rem" }}
       >
         <div className="relative w-full h-full">
-          {/* w-64 = 256px, h-72 = 288px */}
           <Image
             src="/paris-stamp.png"
             alt="Paris Stamp"
@@ -111,11 +123,10 @@ export function HeroSection() {
 
       {/* Telephone Booth */}
       <div
-        className="absolute bottom-0 right-0 w-56 h-80 pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
+        className="absolute bottom-0 right-0 w-56 h-80 pointer-events-auto cursor-none transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
         style={{ transform: "rotate(-10deg)", marginBottom: "-2.5rem", marginRight: "-2.5rem" }}
       >
         <div className="relative w-full h-full">
-          {/* w-56 = 224px, h-80 = 320px */}
           <Image
             src="/telephone-booth.png"
             alt="Telephone Booth"
@@ -128,11 +139,10 @@ export function HeroSection() {
 
       {/* Veil 2 */}
       <div
-        className="absolute top-1/4 right-8 w-64 h-80 pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
+        className="absolute top-1/4 right-8 w-64 h-80 pointer-events-auto cursor-none transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
         style={{ transform: "rotate(10deg)" }}
       >
         <div className="relative w-full h-full">
-          {/* w-64 = 256px, h-80 = 320px */}
           <Image
             src="/veil-2.png"
             alt="Veil 2"
@@ -145,11 +155,10 @@ export function HeroSection() {
 
       {/* Veil 4 */}
       <div
-        className="absolute top-1/2 right-0 w-48 h-72 pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
+        className="absolute top-1/2 right-0 w-48 h-72 pointer-events-auto cursor-none transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
         style={{ transform: "rotate(-18deg)", marginRight: "-2rem" }}
       >
         <div className="relative w-full h-full">
-          {/* w-48 = 192px, h-72 = 288px */}
           <Image
             src="/veil-4.png"
             alt="Veil 4"
@@ -160,7 +169,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Stickers - NO HOVER EFFECT (left as-is) */}
+      {/* Stickers - NO HOVER EFFECT */}
       <div className="absolute top-20 left-1/4 w-32 h-32" style={{ transform: "rotate(25deg)" }}>
         <Image src="/sticker.png" alt="" fill className="object-contain" />
       </div>
@@ -175,10 +184,10 @@ export function HeroSection() {
           <div className="relative mb-8 tilt-container" ref={tiltRef}>
             <div className="relative inline-block">
               <div
-                className="relative w-[28rem] h-[28rem] mx-auto rounded-3xl overflow-hidden shadow-2xl tilt-element pointer-events-auto cursor-pointer"
+                className="relative w-[28rem] h-[28rem] mx-auto rounded-3xl overflow-hidden shadow-2xl tilt-element pointer-events-auto cursor-none"
                 style={tiltStyle}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               >
                 <Image
                   src="/me.jpg"
