@@ -35,7 +35,7 @@ export function HeroSection() {
     const handleScroll = () => {
       const scrollY = window.scrollY
       const windowHeight = window.innerHeight
-      const triggerPoint = windowHeight * 0.3 // Trigger when scrolled 30% of viewport height
+      const triggerPoint = windowHeight * 0.3
       
       setIsScrolled(scrollY > triggerPoint)
     }
@@ -53,104 +53,129 @@ export function HeroSection() {
 
   return (
     <section className="min-h-screen relative overflow-hidden bg-background pt-20">
+      {/* Background - NO HOVER EFFECT */}
       <div className="absolute inset-0 opacity-60">
         <Image src="/pink-bgm.png" alt="" fill className="object-cover" priority />
       </div>
 
-      {/* Top Left - Veil 1 (two characters) */}
+      {/* Veil 1 (now like me.jpg) */}
       <div
-        className="absolute -top-10 -left-10 w-80 h-96 collage-asset hover-asset"
-        style={
-          {
-            transform: "rotate(-8deg)",
-            "--original-rotation": "-8deg",
-          } as React.CSSProperties
-        }
+        className="absolute top-0 left-0 w-80 h-96 pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
+        style={{ transform: "rotate(-8deg)", marginTop: "-2.5rem", marginLeft: "-2.5rem" }}
       >
-        <Image src="/veil-1.png" alt="" fill className="object-contain" />
+        <div className="relative w-full h-full">
+          {/* w-80 = 320px, h-96 = 384px */}
+          <Image
+            src="/veil-1.png"
+            alt="Veil 1"
+            width={320}
+            height={384}
+            className="w-full h-full object-contain pointer-events-auto"
+          />
+        </div>
       </div>
 
-      {/* Top Right - Veil 3 (profile sketch) */}
+      {/* Veil 3 */}
       <div
-        className="absolute -top-5 -right-5 w-72 h-80 collage-asset hover-asset"
-        style={
-          {
-            transform: "rotate(12deg)",
-            "--original-rotation": "12deg",
-          } as React.CSSProperties
-        }
+        className="absolute top-0 right-0 w-72 h-80 pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
+        style={{ transform: "rotate(12deg)", marginTop: "-1.25rem", marginRight: "-1.25rem" }}
       >
-        <Image src="/veil-3.png" alt="" fill className="object-contain" />
+        <div className="relative w-full h-full">
+          {/* w-72 = 288px, h-80 = 320px */}
+          <Image
+            src="/veil-3.png"
+            alt="Veil 3"
+            width={288}
+            height={320}
+            className="w-full h-full object-contain pointer-events-auto"
+          />
+        </div>
       </div>
 
-      {/* Bottom Left - Paris Stamp */}
+      {/* Paris Stamp */}
       <div
-        className="absolute -bottom-8 -left-8 w-64 h-72 collage-asset hover-asset"
-        style={
-          {
-            transform: "rotate(6deg)",
-            "--original-rotation": "6deg",
-          } as React.CSSProperties
-        }
+        className="absolute bottom-0 left-0 w-64 h-72 pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
+        style={{ transform: "rotate(6deg)", marginBottom: "-2rem", marginLeft: "-2rem" }}
       >
-        <Image src="/paris-stamp.png" alt="" fill className="object-contain" />
+        <div className="relative w-full h-full">
+          {/* w-64 = 256px, h-72 = 288px */}
+          <Image
+            src="/paris-stamp.png"
+            alt="Paris Stamp"
+            width={256}
+            height={288}
+            className="w-full h-full object-contain pointer-events-auto"
+          />
+        </div>
       </div>
 
-      {/* Bottom Right - Telephone Booth */}
+      {/* Telephone Booth */}
       <div
-        className="absolute -bottom-10 -right-10 w-56 h-80 collage-asset hover-asset"
-        style={
-          {
-            transform: "rotate(-10deg)",
-            "--original-rotation": "-10deg",
-          } as React.CSSProperties
-        }
+        className="absolute bottom-0 right-0 w-56 h-80 pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
+        style={{ transform: "rotate(-10deg)", marginBottom: "-2.5rem", marginRight: "-2.5rem" }}
       >
-        <Image src="/telephone-booth.png" alt="" fill className="object-contain" />
+        <div className="relative w-full h-full">
+          {/* w-56 = 224px, h-80 = 320px */}
+          <Image
+            src="/telephone-booth.png"
+            alt="Telephone Booth"
+            width={224}
+            height={320}
+            className="w-full h-full object-contain pointer-events-auto"
+          />
+        </div>
       </div>
 
-      {/* Middle Left - Veil 2 (casual pose) */}
+      {/* Veil 2 */}
       <div
-        className="absolute top-1/3 -left-12 w-64 h-80 collage-asset hover-asset"
-        style={
-          {
-            transform: "rotate(15deg)",
-            "--original-rotation": "15deg",
-          } as React.CSSProperties
-        }
+        className="absolute top-1/4 right-8 w-64 h-80 pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
+        style={{ transform: "rotate(10deg)" }}
       >
-        <Image src="/veil-2.png" alt="" fill className="object-contain" />
+        <div className="relative w-full h-full">
+          {/* w-64 = 256px, h-80 = 320px */}
+          <Image
+            src="/veil-2.png"
+            alt="Veil 2"
+            width={256}
+            height={320}
+            className="w-full h-full object-contain pointer-events-auto"
+          />
+        </div>
       </div>
 
-      {/* Middle Right - Veil 4 (orange sketch) */}
+      {/* Veil 4 */}
       <div
-        className="absolute top-1/2 -right-8 w-48 h-72 collage-asset hover-asset"
-        style={
-          {
-            transform: "rotate(-18deg)",
-            "--original-rotation": "-18deg",
-          } as React.CSSProperties
-        }
+        className="absolute top-1/2 right-0 w-48 h-72 pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-110 hover:z-20"
+        style={{ transform: "rotate(-18deg)", marginRight: "-2rem" }}
       >
-        <Image src="/veil-4.png" alt="" fill className="object-contain" />
+        <div className="relative w-full h-full">
+          {/* w-48 = 192px, h-72 = 288px */}
+          <Image
+            src="/veil-4.png"
+            alt="Veil 4"
+            width={192}
+            height={288}
+            className="w-full h-full object-contain pointer-events-auto"
+          />
+        </div>
       </div>
 
-      {/* Scattered stickers */}
-      <div className="absolute top-20 left-1/4 w-32 h-32 collage-asset" style={{ transform: "rotate(25deg)" }}>
+      {/* Stickers - NO HOVER EFFECT (left as-is) */}
+      <div className="absolute top-20 left-1/4 w-32 h-32" style={{ transform: "rotate(25deg)" }}>
         <Image src="/sticker.png" alt="" fill className="object-contain" />
       </div>
 
-      <div className="absolute bottom-32 right-1/4 w-28 h-28 collage-asset" style={{ transform: "rotate(-30deg)" }}>
+      <div className="absolute bottom-32 right-1/4 w-28 h-28" style={{ transform: "rotate(-30deg)" }}>
         <Image src="/sticker-2.png" alt="" fill className="object-contain" />
       </div>
 
       {/* Central content */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-6 py-20">
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-6 py-20 pointer-events-none">
         <div className="max-w-2xl mx-auto text-center">
           <div className="relative mb-8 tilt-container" ref={tiltRef}>
             <div className="relative inline-block">
               <div
-                className="relative w-[28rem] h-[28rem] mx-auto rounded-3xl overflow-hidden shadow-2xl tilt-element"
+                className="relative w-[28rem] h-[28rem] mx-auto rounded-3xl overflow-hidden shadow-2xl tilt-element pointer-events-auto cursor-pointer"
                 style={tiltStyle}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
@@ -160,7 +185,7 @@ export function HeroSection() {
                   alt="Aysha's portrait"
                   width={448}
                   height={448}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover pointer-events-auto"
                   priority
                 />
               </div>
