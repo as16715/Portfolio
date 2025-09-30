@@ -80,6 +80,9 @@ export function HeroSection() {
           alt={alt}
           width={Number(style.width) || 200}
           height={Number(style.height) || 200}
+          loading="lazy"
+          placeholder="blur"
+          blurDataURL="/tiny-placeholder.png" // small base64 or tiny image placeholder
           className="w-full h-full object-contain"
         />
       </div>
@@ -90,33 +93,48 @@ export function HeroSection() {
     <section className="min-h-screen relative overflow-hidden bg-background pt-20">
       {/* Background */}
       <div className="absolute inset-0 opacity-60">
-        <Image src="/pink-bgm.png" alt="" fill className="object-cover" priority />
+        <Image
+          src="/pink-bgm.webp"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
 
       {/* Decorative & Veil Elements */}
       {[
-        { id: "veil1", src: "/veil-1.png", style: { top: "45%", left: "23%", width: 320, height: 384, transform: "rotate(-8deg)", zIndex: 26 } },
-        { id: "veil2", src: "/veil-2.png", style: { top: "21%", right: "60%", width: 256, height: 320, transform: "rotate(10deg)", zIndex: 25 } },
-        { id: "veil3", src: "/veil-3.png", style: { top: "-3%", right: "38%", width: 288, height: 320, transform: "rotate(12deg)", zIndex: 15 } },
-        { id: "veil4", src: "/veil-4.png", style: { top: "-5%", right: "60%", width: 192, height: 288, zIndex: 25 } },
-        { id: "veil5", src: "/veil-5.png", style: { top: "20%", left: "65%", width: 240, height: 304, zIndex: 25 } },
-        { id: "veil6", src: "/veil-6.png", style: { top: "73%", right: "0%", width: 280, height: 350, zIndex: 15 } },
-        { id: "stamp", src: "/paris-stamp.png", style: { bottom: "65%", left: "65%", width: 256, height: 288, transform: "rotate(6deg)", zIndex: 15 } },
-        { id: "cutout1", src: "/Cutout.png", style: { top: "79%", left: "0%", width: 220, height: 280, transform: "scaleX(-1)", zIndex: 15 } },
-        { id: "cutout2", src: "/cutout 2.png", style: { top: "0%", left: "-2%", width: 220, height: 280, zIndex: 15 } },
-        { id: "cutout3", src: "/cutout 3.png", style: { top: "0%", right: "-2%", width: 220, height: 280, transform: "scaleX(-1)", zIndex: 15 } },
-        { id: "cutout4", src: "/cutout 4.png", style: { top: "-5%", left: "60%", width: 260, height: 300, zIndex: 12 } },
-        { id: "wild", src: "/Wild.png", style: { top: "39%", right: "21%", width: 240, height: 260, zIndex: 10 } },
-        { id: "booth", src: "/telephone-booth.png", style: { bottom: "35%", right: "64%", width: 224, height: 320, zIndex: 25 } },
-        { id: "bgmLayer", src: "/bgm Layer.jpg", style: { top: "0%", left: "45%", width: 260, height: 300, zIndex: 11 } },
+        { id: "veil1", src: "/veil-1.webp", style: { top: "45%", left: "23%", width: 320, height: 384, transform: "rotate(-8deg)", zIndex: 26 } },
+        { id: "veil2", src: "/veil-2.webp", style: { top: "21%", right: "60%", width: 256, height: 320, transform: "rotate(10deg)", zIndex: 25 } },
+        { id: "veil3", src: "/veil-3.webp", style: { top: "-3%", right: "38%", width: 288, height: 320, transform: "rotate(12deg)", zIndex: 15 } },
+        { id: "veil4", src: "/veil-4.webp", style: { top: "-5%", right: "60%", width: 192, height: 288, zIndex: 25 } },
+        { id: "veil5", src: "/veil-5.webp", style: { top: "20%", left: "65%", width: 240, height: 304, zIndex: 25 } },
+        { id: "veil6", src: "/veil-6.webp", style: { top: "73%", right: "0%", width: 280, height: 350, zIndex: 15 } },
+        { id: "stamp", src: "/paris-stamp.webp", style: { bottom: "65%", left: "65%", width: 256, height: 288, transform: "rotate(6deg)", zIndex: 15 } },
+        { id: "cutout1", src: "/Cutout.webp", style: { top: "79%", left: "0%", width: 220, height: 280, transform: "scaleX(-1)", zIndex: 15 } },
+        { id: "cutout2", src: "/cutout 2.webp", style: { top: "0%", left: "-2%", width: 220, height: 280, zIndex: 15 } },
+        { id: "cutout3", src: "/cutout 3.webp", style: { top: "0%", right: "-5%", width: 220, height: 280, transform: "scaleX(-1)", zIndex: 15 } },
+        { id: "cutout4", src: "/cutout 4.webp", style: { top: "-5%", left: "60%", width: 260, height: 300, transform: "rotate(6deg)", zIndex: 12 } },
+        { id: "cutout5", src: "/cutout 5.webp", style: { top: "0%", left: "35%", width: 220, height: 280, zIndex: 14 } },
+        { id: "wild", src: "/Wild.webp", style: { top: "80%", right: "75%", width: 240, height: 260, zIndex: 15 } },
+        { id: "booth", src: "/telephone-booth.webp", style: { bottom: "35%", right: "64%", width: 224, height: 320, zIndex: 25 } },
+        { id: "bgmLayer", src: "/bgm Layer.webp", style: { top: "0%", left: "45%", width: 260, height: 300, zIndex: 11 } },
+        { id: "layer2", src: "/layer 2.webp", style: { top: "0%", left: "28%", width: 260, height: 300, zIndex: 8 } },
+        { id: "liberty", src: "/liberty.webp", style: { top: "38%", left: "55%", width: 240, height: 320, transform: "scaleX(-1)", zIndex: 25 } },
       ].map((item) => renderDecorative(item.id, item.src, item.style, item.id))}
 
-      {/* Stickers (always static) */}
-      <div className="absolute top-20 left-1/4 w-32 h-32" style={{ transform: "rotate(25deg)", zIndex: 10 }}>
-        <Image src="/sticker.png" alt="" fill className="object-contain" />
+      {/* Stickers (static) */}
+      <div
+        className="absolute top-20 left-1/4 w-32 h-32"
+        style={{ transform: "rotate(25deg)", zIndex: 10 }}
+      >
+        <Image src="/sticker.png" alt="" fill className="object-contain" loading="lazy" />
       </div>
-      <div className="absolute bottom-32 right-1/4 w-28 h-28" style={{ transform: "rotate(-30deg)", zIndex: 10 }}>
-        <Image src="/sticker-2.png" alt="" fill className="object-contain" />
+      <div
+        className="absolute bottom-32 right-1/4 w-28 h-28"
+        style={{ transform: "rotate(-30deg)", zIndex: 10 }}
+      >
+        <Image src="/sticker-2.png" alt="" fill className="object-contain" loading="lazy" />
       </div>
 
       {/* Central content */}
