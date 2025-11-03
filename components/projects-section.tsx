@@ -33,16 +33,18 @@ export function ProjectsSection() {
       link: "https://www.notion.so/Labyrinth-Game-2a0a9591f3f9801788a7dec10b3d0c35?source=copy_link",
     },
     {
-      title: "Interactive Storytelling",
-      description: "Compelling narratives brought to life through interactive digital experiences.",
+      title: "All Routes Lead to death",
+      description: "An interactive story where players navigate an empty stage haunted by memory and repetition. As the protagonist relives fragments of a forgotten crime, each choice draws her closer to uncovering the killer and to the inevitability of her own demise.",
       category: "Stories",
-      image: "/digital-storytelling-interface.jpg",
+      image: "/story.webp",
+      link: "https://ayshasalma.itch.io/all-routes-lead-to-death",
     },
     {
-      title: "Creative Exploration",
-      description: "Experimental projects pushing the boundaries of design and technology.",
-      category: "Exploration",
-      image: "/abstract-creative-digital-art.jpg",
+      title: "Campus Conspiracies",
+      description: "A comedic scripted podcast, Campus Conspiracies follows an interviewer digging into how a student mysteriously aced a communication lab class uncovering absurd theories, over-the-top explanations, and campus-wide hilarity.",
+      category: "Stories",
+      image: "/podcast.webp",
+      link: "https://ayshaalmheiri.github.io/CampusConspiracies-/index.html",
     },
   ]
 
