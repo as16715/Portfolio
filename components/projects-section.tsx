@@ -1,18 +1,22 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card"
 
 export function ProjectsSection() {
   const projects = [
     {
-      title: "Interactive Game Design",
-      description: "Immersive gaming experiences with innovative mechanics and stunning visuals.",
-      category: "Games",
-      image: "/modern-game-interface-design.jpg",
+      title: "Capstone",
+      description: "Explore my progress into project Inhuman, a robotic installation artwork to be showcased in 2026",
+      category: "Robots",
+      image: "/capstone.webp",
+      link: "https://www.notion.so/Interactive-Media-Capstone-2026-263a9591f3f9804c8687edba212d5c1b",
     },
     {
-      title: "Product Innovation",
-      description: "User-centered product designs that solve real-world problems with elegance.",
-      category: "Products",
-      image: "/sleek-product-design-mockup.jpg",
+      title: "Catch the Horse",
+      description: "A hybrid interactive system integrating ultrasonic sensing, digital gameplay, and real-time mechanical output to investigate embodied control feedback, and player responsiveness.",
+      category: "Games",
+      image: "/horse game.webp",
+      link: "https://www.notion.so/Catch-the-Horse-Bridging-Kinetic-Input-and-Digital-Response-in-Interactive-Design-2a0a9591f3f980b9a291c615b1f11cd1?source=copy_link",
     },
     {
       title: "Robotic Systems",
@@ -40,6 +44,12 @@ export function ProjectsSection() {
     },
   ]
 
+  const handleProjectClick = (link?: string) => {
+    if (link) {
+      window.open(link, '_blank', 'noopener,noreferrer')
+    }
+  }
+
   return (
     <section className="py-20 px-6">
       <div className="max-w-7xl mx-auto">
@@ -56,7 +66,10 @@ export function ProjectsSection() {
           {projects.map((project, index) => (
             <Card
               key={index}
-              className="group hover:scale-105 transition-all duration-300 cursor-pointer bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50"
+              className={`group hover:scale-105 transition-all duration-300 bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 ${
+                project.link ? 'cursor-pointer' : ''
+              }`}
+              onClick={() => handleProjectClick(project.link)}
             >
               <CardContent className="p-0">
                 <div className="aspect-[4/3] overflow-hidden rounded-t-lg">
@@ -67,7 +80,19 @@ export function ProjectsSection() {
                   />
                 </div>
                 <div className="p-6">
-                  <div className="text-sm text-primary font-medium mb-2">{project.category}</div>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-sm text-primary font-medium">{project.category}</div>
+                    {project.link && (
+                      <svg 
+                        className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    )}
+                  </div>
                   <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{project.description}</p>
                 </div>
