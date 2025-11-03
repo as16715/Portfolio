@@ -299,6 +299,15 @@ html {
   transform-origin: center;
 }
 
+@keyframes pendulumSwing {
+  0%, 100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
 .crumpled-paper-text.crumpling {
   animation: crumplePaper 0.6s ease-in-out;
 }

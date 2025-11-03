@@ -155,7 +155,7 @@ export function HeroSection() {
     { id: "veil5", src: "/veil-5.webp", style: { top: "20%", left: "65%", width: 240, height: 304, zIndex: 25 } },
     { id: "veil6", src: "/veil-6.webp", style: { top: "73%", right: "0%", width: 280, height: 350, zIndex: 15 } },
     { id: "veil7", src: "/veil-7.webp", style: { top: "12%", left: "-2%", width: 270, height: 340, transform: "rotate(-5deg)", zIndex: 16 } },
-    { id: "veil8", src: "/veil-8.webp", style: { top: "60%", left: "-4%", width: 500, height: 500, transform: "rotate(0deg)", zIndex: 16 } },
+    { id: "veil8", src: "/veil-8.webp", style: { top: "60%", left: "-4%", width: 500, height: 500, transform: "rotate(0deg)", zIndex: 16, animation: "pendulumSwing 4s ease-in-out infinite" } },
     { id: "veil9", src: "/veil-9.webp", style: { top: "40%", right: "10%", width: 250, height: 310, transform: "rotate(-12deg)", zIndex: 26 } },
     { id: "veil10", src: "/veil-10.webp", style: { top: "0%", left: "80%", width: 280, height: 350, transform: "rotate(6deg)", zIndex: 18 } },
     { id: "veil11", src: "/veil-11.webp", style: { top: "33%", left: "-3%", width: 240, height: 300, transform: "rotate(-10deg)", zIndex: 17 } },
