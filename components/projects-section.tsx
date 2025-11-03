@@ -6,7 +6,7 @@ export function ProjectsSection() {
   const projects = [
     {
       title: "Capstone",
-      description: "Explore my progress into project Inhuman, a robotic installation artwork to be showcased in 2026",
+      description: "Explore my progress into project Inhuman, a robotic installation artwork to be showcased in spring 2026",
       category: "Robots",
       image: "/capstone.webp",
       link: "https://www.notion.so/Interactive-Media-Capstone-2026-263a9591f3f9804c8687edba212d5c1b",
@@ -19,16 +19,18 @@ export function ProjectsSection() {
       link: "https://www.notion.so/Catch-the-Horse-Bridging-Kinetic-Input-and-Digital-Response-in-Interactive-Design-2a0a9591f3f980b9a291c615b1f11cd1?source=copy_link",
     },
     {
-      title: "Robotic Systems",
-      description: "Cutting-edge robotics projects combining functionality with aesthetic appeal.",
-      category: "Robots",
-      image: "/futuristic-robot-design.jpg",
+      title: "How Fairies play the piano",
+      description: "An interactive light-based piano that blends analog sensing and digital sound, using a glowing wand and photoresistors to control notes and octaves through light intensity.",
+      category: "Products",
+      image: "/piano.webp",
+      link: "https://www.notion.so/Fairy-Piano-2a0a9591f3f98032b594c886accbf492?source=copy_link",
     },
     {
-      title: "3D Asset Creation",
-      description: "High-quality 3D models and environments for games and interactive media.",
-      category: "3D Assets",
-      image: "/3d-rendered-objects-and-environments.jpg",
+      title: "labyrinth game",
+      description: "A competitive two-player maze game inspired by Greek mythology, featuring dynamic labyrinth generation, collision detection, and real-time elimination — where only one player can survive the ever-changing maze.",
+      category: "Games",
+      image: "/labyrinth.webp",
+      link: "https://www.notion.so/Labyrinth-Game-2a0a9591f3f9801788a7dec10b3d0c35?source=copy_link",
     },
     {
       title: "Interactive Storytelling",
