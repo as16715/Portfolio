@@ -1,8 +1,21 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 
-export function ProjectsSection() {
+interface ProjectsSectionProps {
+  selectedCategory?: string
+}
+
+export function ProjectsSection({ selectedCategory = "All Projects" }: ProjectsSectionProps) {
+  const [activeCategory, setActiveCategory] = useState("All Projects")
+
+  useEffect(() => {
+    if (selectedCategory) {
+      setActiveCategory(selectedCategory)
+    }
+  }, [selectedCategory])
+
   const projects = [
     {
       title: "Capstone",
@@ -54,20 +67,33 @@ export function ProjectsSection() {
     }
   }
 
+  // Filter projects based on selected category
+  const filteredProjects = activeCategory === "All Projects" 
+    ? projects 
+    : projects.filter(project => project.category === activeCategory)
+
+  const otherProjects = activeCategory === "All Projects" 
+    ? [] 
+    : projects.filter(project => project.category !== activeCategory)
+
   return (
-    <section className="py-20 px-6">
+    <section id="projects-section" className="py-20 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-balance mb-6">
-            Featured <span className="text-primary">Projects</span>
+            {activeCategory === "All Projects" ? "Featured" : activeCategory} <span className="text-primary">Projects</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A collection of my creative work spanning games, products, robotics, 3D assets, and interactive stories.
+            {activeCategory === "All Projects" 
+              ? "A collection of my creative work spanning games, products, robotics, 3D assets, and interactive stories."
+              : `Showcasing my ${activeCategory.toLowerCase()} work`
+            }
           </p>
         </div>
 
+        {/* Filtered Projects */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <Card
               key={index}
               className={`group hover:scale-105 transition-all duration-300 bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 ${
@@ -104,6 +130,55 @@ export function ProjectsSection() {
             </Card>
           ))}
         </div>
+
+        {/* Other Projects Section */}
+        {otherProjects.length > 0 && (
+          <div className="mt-20">
+            <div className="text-center mb-12">
+              <h3 className="text-2xl md:text-4xl font-bold text-balance">
+                Other <span className="text-primary">Projects</span>
+              </h3>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {otherProjects.map((project, index) => (
+                <Card
+                  key={index}
+                  className={`group hover:scale-105 transition-all duration-300 bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 ${
+                    project.link ? 'cursor-pointer' : ''
+                  }`}
+                  onClick={() => handleProjectClick(project.link)}
+                >
+                  <CardContent className="p-0">
+                    <div className="aspect-[4/3] overflow-hidden rounded-t-lg">
+                      <img
+                        src={project.image || "/placeholder.svg"}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="text-sm text-primary font-medium">{project.category}</div>
+                        {project.link && (
+                          <svg 
+                            className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        )}
+                      </div>
+                      <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{project.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )
