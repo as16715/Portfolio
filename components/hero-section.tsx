@@ -167,7 +167,7 @@ export function HeroSection() {
     { id: "cutout5", src: "/cutout 5.webp", style: { top: "0%", left: "35%", width: 220, height: 280, zIndex: 14 } },
     { id: "cutout6", src: "/cutout 6.webp", style: { top: "25%", left: "10%", width: 300, height: 300, transform: "rotate(-5deg)", zIndex: 17 } },
     { id: "cutout7", src: "/cutout 7.webp", style: { top: "25%", left: "70%", width: 500, height: 500, zIndex: 14 } },
-    { id: "wild", src: "/Wild.webp", style: { top: "80%", right: "75%", width: 240, height: 260, zIndex: 16 } },
+    { id: "wild", src: "/wild.webp", style: { top: "80%", right: "75%", width: 240, height: 260, zIndex: 16 } },
     { id: "butterfly", src: "/butterfly.webp", style: { top: "20%", left: "80%", width: 150, height: 150, zIndex: 18 } },
     { id: "bouquet", src: "/bouquet.webp", style: { top: "60%", right: "0%", width: 240, height: 260, zIndex: 15 } },
     { id: "booth", src: "/telephone-booth.webp", style: { bottom: "35%", right: "64%", width: 224, height: 320, zIndex: 25 } },
