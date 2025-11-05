@@ -71,8 +71,18 @@ export function Navigation({ onCategorySelect }: NavigationProps) {
           </div>
 
           {/* Contact */}
-          <div className="flex items-center gap-2 group cursor-pointer">
-            <span className="text-lg font-medium text-foreground hover:text-primary transition-colors">Contact</span>
+          <div
+            className="flex items-center gap-2 group cursor-pointer"
+            onClick={() => {
+              window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth",
+              })
+            }}
+          >
+            <span className="text-lg font-medium text-foreground hover:text-primary transition-colors">
+              Contact
+            </span>
             <div className="w-6 h-6 transition-transform group-hover:scale-110">🌻</div>
           </div>
         </div>
