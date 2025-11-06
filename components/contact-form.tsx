@@ -9,8 +9,7 @@ export function ContactForm() {
     event.preventDefault()
     setResult("Sending...")
     const formData = new FormData(event.currentTarget)
-    formData.append("access_key", "KEY-HERE") // Add your own API key here, go to https://web3forms.com, sign up, add a contact form and which email to send it to, copy key here
-
+    formData.append("access_key", "ea58de00-265f-4732-8eae-e2b8606295ee") 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       body: formData,
