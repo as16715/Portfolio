@@ -59,6 +59,13 @@ export function ProjectsSection({ selectedCategory = "All Projects" }: ProjectsS
       image: "/podcast.webp",
       link: "https://ayshaalmheiri.github.io/CampusConspiracies-/index.html",
     },
+    {
+      title: "Professors Wrath",
+      description: "An Interactive Storytelling comic where player choices determine survival of the scenario.",
+      category: "Stories",
+      image: "/Comic.webp",
+      link: "https://maheat.github.io/comic/index.html",
+    },
   ]
 
   const handleProjectClick = (link?: string) => {
