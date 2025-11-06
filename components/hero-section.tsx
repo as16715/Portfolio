@@ -1,9 +1,11 @@
 "use client"
 
 import Image from "next/image"
+import { PaperGifText } from "./PaperGifText"
 import { useEffect, useRef, useState } from "react"
 
 export function HeroSection() {
+  const skills = ["robots", "stories", "games", "3D assets"]
   const tiltRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
@@ -12,11 +14,8 @@ export function HeroSection() {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
   const [hasLoaded, setHasLoaded] = useState(false)
 
-  // Design size
-  const DESIGN_WIDTH = 1900
-  const DESIGN_HEIGHT = 1000
-
   useEffect(() => {
+    // Trigger animation on mount
     setTimeout(() => setHasLoaded(true), 100)
   }, [])
 
@@ -71,22 +70,25 @@ export function HeroSection() {
     transition: "transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94)",
   }
 
+  // Determine animation direction based on position
   const getAnimationDirection = (style: any) => {
     const left = style.left ? parseFloat(String(style.left)) : null
     const right = style.right ? parseFloat(String(style.right)) : null
     const top = style.top ? parseFloat(String(style.top)) : null
     const bottom = style.bottom ? parseFloat(String(style.bottom)) : null
 
-    if (left !== null && left < 30) return "left"
-    if (right !== null && right < 30) return "right"
-    if (top !== null && top < 30) return "top"
-    if (bottom !== null && bottom < 30) return "bottom"
-
+    // Determine primary direction based on position
+    if (left !== null && left < 30) return "left" // From left edge
+    if (right !== null && right < 30) return "right" // From right edge
+    if (top !== null && top < 30) return "top" // From top edge
+    if (bottom !== null && bottom < 30) return "bottom" // From bottom edge
+    
+    // For middle elements, choose based on horizontal position
     if (left !== null && left >= 50) return "right"
     if (left !== null && left < 50) return "left"
     if (right !== null && right >= 50) return "left"
-
-    return "top"
+    
+    return "top" // Default
   }
 
   const getInitialTransform = (direction: string) => {
@@ -114,7 +116,7 @@ export function HeroSection() {
     const isDimmed = hoveredId !== null && hoveredId !== id
     const direction = getAnimationDirection(style)
     const initialTransform = getInitialTransform(direction)
-
+    
     return (
       <div
         key={id}
@@ -125,8 +127,8 @@ export function HeroSection() {
           ...style,
           filter: isDimmed ? "brightness(0.5)" : "brightness(1)",
           opacity: hasLoaded ? 1 : 0,
-          transform: hasLoaded
-            ? (style.transform as string) || "none"
+          transform: hasLoaded 
+            ? style.transform || "none"
             : `${initialTransform} ${style.transform || ""}`,
           transition: `all ${0.8 + index * 0.05}s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.03}s, filter 0.3s ease-out`,
         }}
@@ -176,104 +178,62 @@ export function HeroSection() {
   ]
 
   return (
-    <section className="relative overflow-hidden bg-background pt-20">
+    <section className="min-h-screen relative overflow-hidden bg-background pt-20">
+      {/* Background */}
+      <div className="absolute inset-0 opacity-60">
+        <Image
+          src="/pink-bgm.webp"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
+      {/* Decorative elements */}
+      {decorativeElements.map((item, index) => 
+        renderDecorative(item.id, item.src, item.style, item.id, index)
+      )}
+
+      {/* Stickers */}
       <div
-        className="relative w-screen overflow-hidden flex items-center justify-center"
-        style={{
-          height: `calc(${DESIGN_HEIGHT}px * (100vw / ${DESIGN_WIDTH}))`,
-          minHeight: "500px",
+        className="absolute top-20 left-1/4 w-40 h-40 transition-all duration-1000 ease-out"
+        style={{ 
+          transform: hasLoaded ? "rotate(25deg)" : "translateY(-200%) rotate(25deg)",
+          opacity: hasLoaded ? 1 : 0,
+          transitionDelay: "0.5s",
+          zIndex: 10 
         }}
       >
-        <div className="absolute inset-0 opacity-60">
-          <Image
-            src="/pink-bgm.webp"
-            alt=""
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-
-        {/* scaled canvas */}
-        <div
-          className="relative origin-top-left"
-          style={{
-            width: `${DESIGN_WIDTH}px`,
-            height: `${DESIGN_HEIGHT}px`,
-            transform: `scale(calc(100vw / ${DESIGN_WIDTH}))`,
-            transformOrigin: "top left",
-          }}
-        >
-          {decorativeElements.map((item, index) =>
-            renderDecorative(item.id, item.src, item.style, item.id, index)
-          )}
-
-          <div
-            className="absolute transition-all duration-1000 ease-out"
-            style={{
-              top: "80px",
-              left: "460px",
-              width: "160px",
-              height: "160px",
-              transform: hasLoaded
-                ? "rotate(25deg)"
-                : "translateY(-200%) rotate(25deg)",
-              opacity: hasLoaded ? 1 : 0,
-              transitionDelay: "0.5s",
-              zIndex: 30,
-            }}
-          >
-            <Image
-              src="/sticker.png"
-              alt=""
-              fill
-              className="object-contain"
-              loading="lazy"
-            />
-          </div>
-          <div
-            className="absolute transition-all duration-1000 ease-out"
-            style={{
-              bottom: "120px",
-              right: "420px",
-              width: "140px",
-              height: "140px",
-              transform: hasLoaded
-                ? "rotate(-30deg)"
-                : "translateY(200%) rotate(-30deg)",
-              opacity: hasLoaded ? 1 : 0,
-              transitionDelay: "0.6s",
-              zIndex: 10
-            }}
-          >
-            <Image
-              src="/sticker-2.png"
-              alt=""
-              fill
-              className="object-contain"
-              loading="lazy"
-            />
-          </div>
+        <Image src="/sticker.png" alt="" fill className="object-contain" loading="lazy" />
+      </div>
+      <div
+        className="absolute bottom-32 right-1/4 w-35 h-35 transition-all duration-1000 ease-out"
+        style={{ 
+          transform: hasLoaded ? "rotate(-30deg)" : "translateY(200%) rotate(-30deg)",
+          opacity: hasLoaded ? 1 : 0,
+          transitionDelay: "0.6s",
+          zIndex: 10 
+        }}
+      >
+        <Image src="/sticker-2.png" alt="" fill className="object-contain" loading="lazy" />
+      </div>
 
       {/* Central content */}
+      <div className="relative flex items-center justify-center min-h-screen px-6 py-20 pointer-events-none">
+        <div className="max-w-2xl mx-auto text-center">
+          {/* Portrait tilt with 3D parallax text overlay */}
           <div
+            className="relative mb-8 tilt-container transition-all duration-500 ease-out"
             ref={tiltRef}
-            className="absolute"
             style={{
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "520px",
-              height: "520px",
+              zIndex: isHovering ? 999 : 20,
               transformStyle: "preserve-3d",
-              zIndex: isHovering ? 999 : 200,
             }}
           >
             <div
-              className={`relative w-full h-full rounded-3xl shadow-2xl pointer-events-auto transition-all duration-500 ease-out ${
-                isHovering
-                  ? "scale-105 shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
-                  : "scale-100"
+              className={`relative w-[35rem] h-[35rem] mx-auto rounded-3xl shadow-2xl pointer-events-auto cursor-none transition-all duration-500 ease-out ${
+                isHovering ? "scale-105 shadow-[0_20px_60px_rgba(0,0,0,0.45)]" : "scale-100"
               }`}
               style={{ transformStyle: "preserve-3d", overflow: "visible" }}
               onMouseEnter={handleMouseEnter}
@@ -287,8 +247,9 @@ export function HeroSection() {
                 <Image
                   src="/me.jpg"
                   alt="Aysha's portrait"
-                  fill
-                  className="object-cover"
+                  width={560}
+                  height={560}
+                  className="w-full h-full object-cover"
                   priority
                 />
               </div>
@@ -324,15 +285,7 @@ export function HeroSection() {
           </div>
 
           {/* Scrapbook text boxes */}
-          <div className="absolute"
-            style={{
-              bottom: "50px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "750px",
-              zIndex: 400,
-            }}
-          >
+          <div className="relative space-y-6 z-40">
             <div
               className={`scrapbook-paper rounded-2xl p-8 shadow-lg transition-all duration-1000 ease-out relative ${
                 isScrolled
@@ -351,27 +304,19 @@ export function HeroSection() {
             </div>
 
             <div
-              className={`scrapbook-paper mt-4 rounded-xl p-6 shadow-md transition-all duration-1000 ease-out delay-300 relative ${
+              className={`scrapbook-paper rounded-xl p-6 shadow-md transition-all duration-1000 ease-out delay-300 relative ${
                 isScrolled
                   ? "opacity-100 translate-x-0 scale-100"
-                  : "opacity-0 translate-x-28 scale-95"
+                  : "opacity-0 translate-x-128 scale-95"
               }`}
               style={{ transform: "rotate(1deg)" }}
             >
-              <div className="flex items-center gap-0">
-                <span className="text-2xl md:text-3xl font-bold text-muted-foreground whitespace-nowrap">
-                  I design and make
-                </span>
-                {/* your pre-baked animated gif with text */}
-                <div className="relative w-48 h-16 -ml-5">
-                  <Image
-                    src="/combined-skills-gif.gif" // Custom gif combined on ezgif.com, instead of timing text onto the animation x4
-                    alt="skills animation"
-                    fill
-                    className="object-contain"
-                    unoptimized
-                  />
-                </div>
+              <div className="text-2xl md:text-3xl font-bold text-muted-foreground">
+                <span>I design and make </span>
+                <PaperGifText
+                  words={skills}
+                  className="text-primary font-bold align-bottom"
+                />
               </div>
             </div>
           </div>
