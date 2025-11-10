@@ -66,6 +66,20 @@ export function ProjectsSection({ selectedCategory = "All Projects" }: ProjectsS
       image: "/Comic.webp",
       link: "https://maheat.github.io/comic/index.html",
     },
+    {
+      title: "Where's My cookie?",
+      description: "An Interactive Storytelling Film where player choices determine survival of the scenario.",
+      category: "Stories",
+      image: "/Film.webp",
+      link: "https://keys19.github.io/video_commlab/",
+    },
+    {
+      title: "Memo The Recipe",
+      description: "A memory cooking game where players need to remember the recipe to clear each round.",
+      category: "Games",
+      image: "/cooking game.webp",
+      link: "https://ayshasalma.itch.io/guesstherecipe",
+    },
   ]
 
   const handleProjectClick = (link?: string) => {
