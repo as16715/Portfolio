@@ -80,6 +80,13 @@ export function ProjectsSection({ selectedCategory = "All Projects" }: ProjectsS
       image: "/cooking game.webp",
       link: "https://ayshasalma.itch.io/guesstherecipe",
     },
+    {
+      title: "Maze Rush: Duel descent",
+      description: "A two-player circular maze game emphasizing spatial precision and strategy, featuring power-ups, dynamic wall traps, and instant maze reset for rapid replay.",
+      category: "Games",
+      image: "/maze.webp",
+      link: "https://ayshasalma.itch.io/maze-game-20",
+    },
   ]
 
   const handleProjectClick = (link?: string) => {
