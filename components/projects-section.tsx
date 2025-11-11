@@ -25,6 +25,22 @@ export function ProjectsSection({ selectedCategory = "All Projects" }: ProjectsS
       link: "https://www.notion.so/Interactive-Media-Capstone-2026-263a9591f3f9804c8687edba212d5c1b",
     },
     {
+      title: "Particle Noise synthesis Concert",
+      description: "An interactive audiovisual performance transforming chaotic attractor data into evolving ambient soundscapes and visuals using Max/MSP, Jitter, and Arduino.",
+      category: "Products",
+      image: "/concert.webp",
+      link: "https://www.notion.so/Particle-Noise-synthesis-Concert-2a7a9591f3f98055825dcbd75aa8e865?source=copy_link",
+    },
+
+     {
+      title: "Professors Wrath",
+      description: "An Interactive Storytelling comic where player choices determine survival of the scenario.",
+      category: "Stories",
+      image: "/Comic.webp",
+      link: "https://maheat.github.io/comic/index.html",
+    },
+    
+    {
       title: "Catch the Horse",
       description: "A hybrid interactive system integrating ultrasonic sensing, digital gameplay, and real-time mechanical output to investigate embodied control feedback, and player responsiveness.",
       category: "Games",
@@ -59,13 +75,7 @@ export function ProjectsSection({ selectedCategory = "All Projects" }: ProjectsS
       image: "/podcast.webp",
       link: "https://ayshaalmheiri.github.io/CampusConspiracies-/index.html",
     },
-    {
-      title: "Professors Wrath",
-      description: "An Interactive Storytelling comic where player choices determine survival of the scenario.",
-      category: "Stories",
-      image: "/Comic.webp",
-      link: "https://maheat.github.io/comic/index.html",
-    },
+
     {
       title: "Where's My cookie?",
       description: "An Interactive Storytelling Film where player choices determine survival of the scenario.",
@@ -86,13 +96,6 @@ export function ProjectsSection({ selectedCategory = "All Projects" }: ProjectsS
       category: "Games",
       image: "/maze.webp",
       link: "https://ayshasalma.itch.io/maze-game-20",
-    },
-    {
-      title: "Particle Noise synthesis Concert",
-      description: "An interactive audiovisual performance transforming chaotic attractor data into evolving ambient soundscapes and visuals using Max/MSP, Jitter, and Arduino.",
-      category: "Products",
-      image: "/concert.webp",
-      link: "https://www.notion.so/Particle-Noise-synthesis-Concert-2a7a9591f3f98055825dcbd75aa8e865?source=copy_link",
     },
   ]
 
