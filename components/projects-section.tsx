@@ -87,6 +87,13 @@ export function ProjectsSection({ selectedCategory = "All Projects" }: ProjectsS
       image: "/maze.webp",
       link: "https://ayshasalma.itch.io/maze-game-20",
     },
+    {
+      title: "Particle Noise synthesis Concert",
+      description: "An interactive audiovisual performance transforming chaotic attractor data into evolving ambient soundscapes and visuals using Max/MSP, Jitter, and Arduino.",
+      category: "Products",
+      image: "/concert.webp",
+      link: "https://www.notion.so/Particle-Noise-synthesis-Concert-2a7a9591f3f98055825dcbd75aa8e865?source=copy_link",
+    },
   ]
 
   const handleProjectClick = (link?: string) => {
