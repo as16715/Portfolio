@@ -31,7 +31,13 @@ export function ProjectsSection({ selectedCategory = "All Projects" }: ProjectsS
       image: "/concert.webp",
       link: "https://www.notion.so/Particle-Noise-synthesis-Concert-2a7a9591f3f98055825dcbd75aa8e865?source=copy_link",
     },
-
+    {
+      title: "Ikigai Makerthon Project",
+      description: "Awarded first place for creating an assistive mug with an extendable handle to improve water accessibility for individuals living in rural areas with mobility challenges.",
+      category: "Products",
+      image: "/ikigai.webp",
+      link: "https://www.notion.so/Ikigai-Makerthon-2b8a9591f3f980fcbaaffd11eddd84ad?source=copy_link",
+    },
      {
       title: "Professors Wrath",
       description: "An Interactive Storytelling comic where player choices determine survival of the scenario.",

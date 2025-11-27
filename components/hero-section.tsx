@@ -14,6 +14,10 @@ export function HeroSection() {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
   const [hasLoaded, setHasLoaded] = useState(false)
 
+  // Design size for scaling decorative elements
+  const DESIGN_WIDTH = 1900
+  const DESIGN_HEIGHT = 1000
+
   useEffect(() => {
     // Trigger animation on mount
     setTimeout(() => setHasLoaded(true), 100)
@@ -190,36 +194,61 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Decorative elements */}
-      {decorativeElements.map((item, index) => 
-        renderDecorative(item.id, item.src, item.style, item.id, index)
-      )}
-
-      {/* Stickers */}
+      {/* Scaled decorative canvas - positioned absolutely behind content */}
       <div
-        className="absolute top-20 left-1/4 w-40 h-40 transition-all duration-1000 ease-out"
-        style={{ 
-          transform: hasLoaded ? "rotate(25deg)" : "translateY(-200%) rotate(25deg)",
-          opacity: hasLoaded ? 1 : 0,
-          transitionDelay: "0.5s",
-          zIndex: 10 
+        className="absolute inset-0 pointer-events-none flex items-center justify-center"
+        style={{
+          minHeight: "100vh",
         }}
       >
-        <Image src="/sticker.png" alt="" fill className="object-contain" loading="lazy" />
-      </div>
-      <div
-        className="absolute bottom-32 right-1/4 w-35 h-35 transition-all duration-1000 ease-out"
-        style={{ 
-          transform: hasLoaded ? "rotate(-30deg)" : "translateY(200%) rotate(-30deg)",
-          opacity: hasLoaded ? 1 : 0,
-          transitionDelay: "0.6s",
-          zIndex: 10 
-        }}
-      >
-        <Image src="/sticker-2.png" alt="" fill className="object-contain" loading="lazy" />
+        <div
+          className="relative"
+          style={{
+            width: `${DESIGN_WIDTH}px`,
+            height: `${DESIGN_HEIGHT}px`,
+            transform: `scale(calc(100vw / ${DESIGN_WIDTH}))`,
+          }}
+        >
+          {/* Decorative elements */}
+          {decorativeElements.map((item, index) => 
+            renderDecorative(item.id, item.src, item.style, item.id, index)
+          )}
+
+          {/* Stickers */}
+          <div
+            className="absolute transition-all duration-1000 ease-out"
+            style={{ 
+              top: "80px",
+              left: "460px",
+              width: "160px",
+              height: "160px",
+              transform: hasLoaded ? "rotate(25deg)" : "translateY(-200%) rotate(25deg)",
+              opacity: hasLoaded ? 1 : 0,
+              transitionDelay: "0.5s",
+              zIndex: 30,
+            }}
+          >
+            <Image src="/sticker.png" alt="" fill className="object-contain" loading="lazy" />
+          </div>
+          <div
+            className="absolute transition-all duration-1000 ease-out"
+            style={{ 
+              bottom: "120px",
+              right: "420px",
+              width: "140px",
+              height: "140px",
+              transform: hasLoaded ? "rotate(-30deg)" : "translateY(200%) rotate(-30deg)",
+              opacity: hasLoaded ? 1 : 0,
+              transitionDelay: "0.6s",
+              zIndex: 10,
+            }}
+          >
+            <Image src="/sticker-2.png" alt="" fill className="object-contain" loading="lazy" />
+          </div>
+        </div>
       </div>
 
-      {/* Central content */}
+      {/* Central content - normal flow, not scaled */}
       <div className="relative flex items-center justify-center min-h-screen px-6 py-20 pointer-events-none">
         <div className="max-w-2xl mx-auto text-center">
           {/* Portrait tilt with 3D parallax text overlay */}
