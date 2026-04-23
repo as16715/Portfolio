@@ -121,20 +121,32 @@ export function HeroSection() {
     const direction = getAnimationDirection(style)
     const initialTransform = getInitialTransform(direction)
     
+    const isHovered = hoveredId === id
+    const baseTransform = style.transform || ""
+    const hoverTransform = isHovered ? ` scale(1.12) translateY(-8px)` : ""
     return (
       <div
         key={id}
         onMouseEnter={() => setHoveredId(id)}
         onMouseLeave={() => setHoveredId(null)}
-        className="absolute transition-all duration-300 ease-out"
+        className="absolute"
         style={{
           ...style,
-          filter: isDimmed ? "brightness(0.5)" : "brightness(1)",
+          pointerEvents: "auto",
+          cursor: "pointer",
+          filter: isDimmed
+            ? "brightness(0.5)"
+            : isHovered
+            ? "brightness(1.1) drop-shadow(6px 8px 14px rgba(93,78,55,0.45))"
+            : "brightness(1)",
           opacity: hasLoaded ? 1 : 0,
-          transform: hasLoaded 
-            ? style.transform || "none"
-            : `${initialTransform} ${style.transform || ""}`,
-          transition: `all ${0.8 + index * 0.05}s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.03}s, filter 0.3s ease-out`,
+          transform: hasLoaded
+            ? `${baseTransform}${hoverTransform}`
+            : `${initialTransform} ${baseTransform}`,
+          transition: hasLoaded
+            ? `transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease-out`
+            : `all ${0.8 + index * 0.05}s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.03}s, filter 0.3s ease-out`,
+          zIndex: isHovered ? 40 : (style.zIndex as number | undefined),
         }}
       >
         <Image
@@ -152,9 +164,10 @@ export function HeroSection() {
   }
 
   const decorativeElements = [
+    // Veils — original sizes, original positions
     { id: "veil1", src: "/veil-1.webp", style: { top: "45%", left: "23%", width: 400, height: 480, transform: "rotate(-8deg)", zIndex: 26 } },
     { id: "veil2", src: "/veil-2.webp", style: { top: "21%", right: "60%", width: 320, height: 400, transform: "rotate(10deg)", zIndex: 25 } },
-    { id: "veil3", src: "/veil-3.webp", style: { top: "-3%", right: "38%", width: 360, height: 400, transform: "rotate(12deg)", zIndex: 15 } },
+    { id: "veil3", src: "/veil-3.webp", style: { top: "3%", right: "55%", width: 360, height: 400, transform: "rotate(12deg)", zIndex: 15 } },
     { id: "veil4", src: "/veil-4.webp", style: { top: "-5%", right: "60%", width: 240, height: 360, zIndex: 25 } },
     { id: "veil5", src: "/veil-5.webp", style: { top: "20%", left: "65%", width: 300, height: 380, zIndex: 25 } },
     { id: "veil6", src: "/veil-6.webp", style: { top: "73%", right: "0%", width: 350, height: 438, zIndex: 15 } },
@@ -163,22 +176,23 @@ export function HeroSection() {
     { id: "veil9", src: "/veil-9.webp", style: { top: "40%", right: "10%", width: 313, height: 388, transform: "rotate(-12deg)", zIndex: 26 } },
     { id: "veil10", src: "/veil-10.webp", style: { top: "0%", left: "80%", width: 350, height: 438, transform: "rotate(6deg)", zIndex: 18 } },
     { id: "veil11", src: "/veil-11.webp", style: { top: "33%", left: "-3%", width: 300, height: 375, transform: "rotate(-10deg)", zIndex: 17 } },
-    { id: "stamp", src: "/paris-stamp.webp", style: { bottom: "65%", left: "65%", width: 320, height: 360, transform: "rotate(6deg)", zIndex: 15 } },
-    { id: "cutout1", src: "/Cutout.webp", style: { top: "79%", left: "0%", width: 275, height: 350, transform: "scaleX(-1)", zIndex: 15 } },
-    { id: "cutout2", src: "/cutout 2.webp", style: { top: "0%", left: "-2%", width: 275, height: 350, zIndex: 15 } },
-    { id: "cutout3", src: "/cutout 3.webp", style: { top: "0%", right: "-5%", width: 275, height: 350, transform: "scaleX(-1)", zIndex: 15 } },
-    { id: "cutout4", src: "/cutout 4.webp", style: { top: "-5%", left: "60%", width: 325, height: 375, transform: "rotate(6deg)", zIndex: 12 } },
-    { id: "cutout5", src: "/cutout 5.webp", style: { top: "0%", left: "35%", width: 275, height: 350, zIndex: 14 } },
-    { id: "cutout6", src: "/cutout 6.webp", style: { top: "25%", left: "10%", width: 375, height: 375, transform: "rotate(-5deg)", zIndex: 17 } },
-    { id: "cutout7", src: "/cutout 7.webp", style: { top: "25%", left: "70%", width: 625, height: 625, zIndex: 14 } },
-    { id: "wild", src: "/wild.webp", style: { top: "80%", right: "75%", width: 300, height: 325, zIndex: 16 } },
-    { id: "butterfly", src: "/butterfly.webp", style: { top: "20%", left: "80%", width: 188, height: 188, zIndex: 18 } },
-    { id: "bouquet", src: "/bouquet.webp", style: { top: "60%", right: "0%", width: 300, height: 325, zIndex: 15 } },
-    { id: "booth", src: "/telephone-booth.webp", style: { bottom: "35%", right: "64%", width: 280, height: 400, zIndex: 25 } },
-    { id: "bgmLayer", src: "/bgm Layer.webp", style: { top: "0%", left: "45%", width: 325, height: 375, zIndex: 11 } },
-    { id: "bgmLayer2", src: "/bgm layer 2.webp", style: { top: "0%", left: "0", width: 500, height: 500, zIndex: 9 } },
-    { id: "layer2", src: "/layer 2.webp", style: { top: "0%", left: "28%", width: 325, height: 375, zIndex: 8 } },
-    { id: "liberty", src: "/liberty.webp", style: { top: "38%", left: "55%", width: 300, height: 400, transform: "scaleX(-1)", zIndex: 25 } },
+    { id: "stamp", src: "/paris-stamp.webp", style: { bottom: "62%", left: "63%", width: 400, height: 450, transform: "rotate(6deg)", zIndex: 15 } },
+    { id: "cutout1", src: "/Cutout.webp", style: { top: "72%", left: "-2%", width: 400, height: 500, transform: "scaleX(-1)", zIndex: 15 } },
+    { id: "cutout2", src: "/cutout 2.webp", style: { top: "-4%", left: "-9%", width: 380, height: 480, zIndex: 15 } },
+    { id: "cutout3", src: "/cutout 3.webp", style: { top: "-12%", right: "-10%", width: 400, height: 500, transform: "scaleX(-1)", zIndex: 15 } },
+    { id: "cutout4", src: "/cutout 4.webp", style: { top: "-8%", left: "58%", width: 440, height: 500, transform: "rotate(6deg)", zIndex: 12 } },
+    { id: "cutout5", src: "/cutout 5.webp", style: { top: "-3%", left: "33%", width: 380, height: 460, zIndex: 14 } },
+    { id: "cutout6", src: "/cutout 6.webp", style: { top: "22%", left: "8%", width: 460, height: 460, transform: "rotate(-5deg)", zIndex: 17 } },
+    { id: "cutout7", src: "/cutout 7.webp", style: { top: "22%", left: "68%", width: 700, height: 700, zIndex: 14 } },
+    { id: "wild", src: "/wild.webp", style: { top: "72%", right: "72%", width: 420, height: 460, zIndex: 16 } },
+    { id: "butterfly", src: "/butterfly.webp", style: { top: "16%", left: "78%", width: 260, height: 260, zIndex: 18 } },
+    { id: "bouquet", src: "/bouquet.webp", style: { top: "54%", right: "-2%", width: 420, height: 460, zIndex: 15 } },
+    { id: "booth", src: "/telephone-booth.webp", style: { bottom: "30%", right: "62%", width: 340, height: 480, zIndex: 25 } },
+    // BGM layers — pushed higher to cover the top gap
+    { id: "bgmLayer", src: "/bgm Layer.webp", style: { top: "-18%", left: "43%", width: 420, height: 480, zIndex: 11 } },
+    { id: "bgmLayer2", src: "/bgm layer 2.webp", style: { top: "-15%", left: "-2%", width: 640, height: 640, zIndex: 9 } },
+    { id: "layer2", src: "/layer 2.webp", style: { top: "-18%", left: "26%", width: 420, height: 480, zIndex: 8 } },
+    { id: "liberty", src: "/liberty.webp", style: { top: "34%", left: "53%", width: 400, height: 540, transform: "scaleX(-1)", zIndex: 25 } },
   ]
 
   return (
